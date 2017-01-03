@@ -1,15 +1,16 @@
-var apiKey = "4738c39a42c67166387737f8be25dcef";
+var apiKey = require('./../.env').apiKey;//finds api key in .env file
 
 $(document).ready(function() {
   $('#weatherLocation').click(function() {
     var city = $('#location').val();
     $('#location').val("");
-    $.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey, function(response) {
+    $.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=' + apiKey).then(function(response){
       $('.showWeather').text("The humidity in " + city + " is " + response.main.humidity + "%");
+    }).fail(function(error) {
+      $('.showWeather').text(error.responseJSON.message);
     });
   });
 });
-
 
 //Example of data pulled
 //

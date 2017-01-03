@@ -1,5 +1,7 @@
 node_modules/
+.DS_Store
 bower_components/
 build/
-temp/
-.DS_Store
+tmp/
+
+//purposely did not hide env
