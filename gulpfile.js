@@ -24,7 +24,10 @@ var lib = require('bower-files')({ //required for bootstrap
 });
 var browserSync = require('browser-sync').create();
 
-
+//reloads server everytime html file changes
+gulp.task('htmlBuild', function() {
+  browserSync.reload();
+});
 
 //FRONT-END TASKS//
 gulp.task('bowerJS', function () {
@@ -50,7 +53,11 @@ gulp.task('serve', function() { //auto server sync
   //watching from the moment the server is launched
   gulp.watch(['js/*.js'], ['jsBuild']);// 2 arguments we want gulp to watch
   gulp.watch(['bower.json'], ['bowerBuild']);// 2 arguments we are watching
+  gulp.watch(['*.html'], ['htmlBuild']);
 });
+
+//Do these go here!!!!!!!!!!!
+
 // array of tasks to run whenever any of the files above change // assumes we are working on dev server so we don't need minifyScripts
 gulp.task('jsBuild', ['jsBrowserify', 'jshint'], function(){
   browserSync.reload();
@@ -60,7 +67,6 @@ gulp.task('jsBuild', ['jsBrowserify', 'jshint'], function(){
 gulp.task('bowerBuild', ['bower'], function(){
   browserSync.reload();
 });
-
 
 
 
